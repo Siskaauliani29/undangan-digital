@@ -28,6 +28,7 @@ const handleSaveDate = () => {
     const start = (page - 1) * itemsPerPage;
     return list.slice(start, start + itemsPerPage);
   };
+  
 const [currentSlide, setCurrentSlide] = useState(0);
 const galleryImages = [
  '/assets/couple.png',
@@ -319,18 +320,34 @@ const prevSlide = () => {
       )}
     </div>
 {/* RSVP & Wishes */}
-        <section className="rsvp-wishes">
-      <div className="rsvp">
-        <h2>RSVP</h2>
-        <form onSubmit={handleRSVPSubmit}>
-          <input type="text" name="name" placeholder="Your Name" required />
-          <select name="status" required>
-            <option value="">Select Status</option>
-            <option value="Attending">Attending</option>
-            <option value="Not Attending">Not Attending</option>
-          </select>
-          <button type="submit">Submit</button>
-        </form>
+        <section className="rsvp-wishes px-4 py-8 bg-white">
+  <div className="rsvp max-w-md mx-auto text-center">
+    <h2 className="mb-4 text-2xl font-semibold">RSVP</h2>
+    <form onSubmit={handleRSVPSubmit} className="flex flex-col gap-4">
+      <input
+        type="text"
+        name="name"
+        placeholder="Your Name"
+        required
+        className="px-4 py-2 border rounded-md w-full"
+      />
+      <select
+        name="status"
+        required
+        className="px-4 py-2 border rounded-md w-full"
+      >
+        <option value="">Select Status</option>
+        <option value="Attending">Attending</option>
+        <option value="Not Attending">Not Attending</option>
+      </select>
+      <button
+        type="submit"
+        className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+      >
+        Submit
+      </button>
+    </form>
+
 
         <div className="rsvp-list">
           <h3>Guest List</h3>
@@ -412,7 +429,7 @@ const prevSlide = () => {
       </div>
     </section>
     <div className="gallery-section">
-  <h3>Our Memories</h3>
+  <h4>Our Memories</h4>
   <div className="gallery-slider">
     <button onClick={prevSlide} className="nav-button prev">‹</button>
     <div className="slide-wrapper">
@@ -443,7 +460,7 @@ const prevSlide = () => {
   <p className="closing-text">
     Wassalamu’alaikum Wr. Wb.
   </p>
-  <h2 className="names">Diva & Reyhan</h2>
+  <h2 className="names">Diva & Cut Rey</h2>
 </div>
 
 

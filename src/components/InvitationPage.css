@@ -326,6 +326,7 @@
   z-index: 1;
   animation: fadeIn 1s ease-in forwards;
   animation-delay: 1.4s;
+  margin-top: -25px;
 }
 
 .custom-wave1 {
@@ -638,6 +639,73 @@
   position: relative;
 }
 
+.rsvp {
+  max-width: 100%; /* Maksimalkan lebar agar responsif */
+  width: 100%; /* Pastikan rsvp tidak melebihi lebar kontainer */
+  margin: 0 auto;
+  text-align: center;
+  background-color: white; /* Warna putih untuk box */
+  padding: 20px; /* Padding agar konten tidak terlalu rapat ke tepi */
+  border-radius: 10px; /* Radius pada sudut box */
+  box-sizing: border-box; /* Agar padding tidak mempengaruhi ukuran lebar box */
+}
+
+input,
+select,
+textarea,
+button {
+  width: 100%; /* Pastikan semua elemen ini mengisi lebar kontainer */
+  box-sizing: border-box; /* Agar padding tidak mempengaruhi ukuran lebar box */
+}
+
+textarea {
+  resize: vertical; /* Membatasi ukuran textarea agar tidak meluas terlalu lebar */
+}
+
+button {
+  background-color: #4CAF50; /* Warna hijau */
+  color: white;
+}
+
+input[type="text"],
+select,
+textarea {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 12px 20px;
+  margin-bottom: 15px;
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .rsvp-wishes {
+    padding: 1.5rem; /* Sesuaikan padding pada layar kecil */
+  }
+
+  .rsvp {
+    padding: 1rem; /* Sesuaikan padding agar box tidak terlalu besar */
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    padding: 10px; /* Kurangi padding agar lebih pas di layar kecil */
+  }
+}
+
+
+
 .rsvp, .wishes {
   flex: 1 1 300px;
   background-color: rgba(255, 255, 255, 0.8);
@@ -677,7 +745,9 @@ button:hover {
 .rsvp-list, .wishes-list {
   margin-top: 1.5rem;
 }
-
+.rsvp-list, .h3 {
+  font-size: 80%;
+}
 .rsvp-list ul, .wishes-list ul {
   list-style: none;
   padding-left: 0;
@@ -687,7 +757,9 @@ button:hover {
   padding: 0.5rem 0;
   border-bottom: 1px solid #eee;
 }
-
+.wishes-list, .h3{
+  font-size: 80%;
+}
 .wishes-list li strong {
   color: #016193; /* darker purple */
 }
@@ -715,28 +787,33 @@ button:hover {
     width: 40px;
     height: 40px;
   }
-}
-.pagination-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
+
+  /* Adjust pagination for mobile */
+  .pagination-controls {
+    flex-direction: row; /* Ensures pagination remains horizontal */
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 100%; /* Ensure pagination controls take up full width */
+  }
+
+  .pagination-controls button {
+    background-color: #1d1f2b;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 0 0 auto; /* Prevent buttons from stretching */
+  }
+
+  .pagination-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
-.pagination-controls button {
-  background-color: #1d1f2b;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.pagination-controls button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
 /* Custom CSS untuk closing-section */
 .closing-section {
   background-color: #14192D;
@@ -890,20 +967,35 @@ button:hover {
   border-radius: 3%;
 }
 
+.gallery-section, h4 {
+  color: #f1eee9;
+}
+
 .gallery-slider {
   position: relative;
   max-width: 90%;
   margin: 0 auto;
   overflow: hidden;
   border-radius: 10px;
+  display: flex; /* To display slides horizontally */
+}
+
+.slide-wrapper {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease-in-out; /* Smooth transition for sliding */
 }
 
 .slide-wrapper img {
   width: 100%;
   height: auto;
   object-fit: cover;
-  transition: all 0.5s ease;
   border-radius: 10px;
+}
+
+.gallery-slider:hover .slide-wrapper img {
+  transform: scale(1.05);
+  opacity: 0.9;
 }
 
 .nav-button {
@@ -919,10 +1011,13 @@ button:hover {
   z-index: 1;
   opacity: 0.7;
   border-radius: 6px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .nav-button:hover {
   opacity: 1;
+  background-color: #4F8FBD;
+  transform: scale(1.1);
 }
 
 .nav-button.prev {
@@ -945,20 +1040,28 @@ button:hover {
     border-radius: 8px;
   }
 
+
   .slide-wrapper img {
     border-radius: 8px;
   }
 
   .nav-button {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     padding: 0.4rem 0.6rem;
+    width: auto;
+    height: auto;
+    min-width: 30px;
+    min-height: 30px;
   }
 
   .nav-button.prev {
-    left: 5px;
+    left: 10px;
   }
 
   .nav-button.next {
-    right: 5px;
+    right: 10px;
   }
 }
+
+
+
