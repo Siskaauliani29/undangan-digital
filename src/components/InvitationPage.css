@@ -1,0 +1,927 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.invitation-container {
+  padding: 30px 20px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  min-height: 100vh;
+  overflow-y: auto;
+  position: relative;
+  animation: fadeIn 1s ease-in;
+}
+
+.invitation-title {
+  font-size: 1rem;
+  color: #2f2f4f;
+  margin-top: 10px;
+  letter-spacing: 2px;
+  animation: slideUp 1s ease-in forwards;
+  opacity: 0;
+  animation-delay: 0.2s;
+}
+
+.initials-box {
+  margin: 20px auto;
+  background: #151c31;
+  color: white;
+  padding: 40px 20px;
+  border-radius: 50px;
+  width: 160px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  animation: slideUp 1s ease-in forwards;
+  opacity: 0;
+  animation-delay: 0.4s;
+}
+
+.initial {
+  font-size: 2.5rem;
+  font-weight: 600;
+  animation: fadeIn 1s ease-in forwards;
+  opacity: 0;
+  animation-delay: 0.6s;
+}
+
+.line {
+  width: 50%;
+  margin: 10px auto;
+  border: 1px solid white;
+  animation: slideUp 1s ease-in forwards;
+  opacity: 0;
+  animation-delay: 0.8s;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+  animation: fadeIn 1s ease-in forwards;
+  opacity: 0;
+  animation-delay: 1s;
+}
+
+.countdown-item {
+  background: #ead9ca;
+  border-radius: 12px;
+  padding: 15px 20px;
+  min-width: 70px;
+  animation: slideUp 0.8s ease-in forwards;
+  opacity: 0;
+  animation-delay: 1.2s;
+}
+
+.countdown-item div {
+  font-size: 1.5rem;
+  font-weight: bold;
+  animation: fadeIn 1s ease-in forwards;
+  opacity: 0;
+  animation-delay: 1.4s;
+}
+
+.date {
+  margin: 10px 0;
+  font-size: 1.5rem;
+  color: #333;
+  animation: fadeIn 1s ease-in forwards;
+  opacity: 0;
+  animation-delay: 1.6s;
+}
+
+.save-date {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #c8b7a6;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  font-style: italic;
+  font-size: 1rem;
+  cursor: pointer;
+  animation: slideUp 1s ease-in forwards;
+  opacity: 0;
+  animation-delay: 1.8s;
+  transition: transform 0.3s;
+}
+
+.save-date:hover {
+  transform: scale(1.05);
+}
+
+.scroll-more {
+  margin-top: 40px;
+  font-size: 1.2rem;
+  animation: bounce 2s infinite, fadeIn 1s ease-in forwards;
+  opacity: 0;
+  animation-delay: 2s;
+}
+
+/* Keyframes */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+/* Dekorasi bunga */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:ital,wght@1,600&family=Great+Vibes&display=swap');
+
+/* ANIMASI UMUM */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes flowerFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* DEKORASI BUNGA */
+.corner {
+  position: absolute;
+  width: 100px;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards, flowerFloat 8s ease-in-out infinite;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+  animation-delay: 0.3s;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+  animation-delay: 0.6s;
+}
+
+/* UNDANGAN */
+.full-invitation {
+  text-align: center;
+  background-color: #0F1621;
+  color: #FCEAD0;
+  padding: 50px 20px;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+/* TEKS PEMBUKA */
+/* ANIMASI YANG LEBIH KEREN */
+@keyframes slideFadeInUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInZoom {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* OPENING */
+.opening {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: slideFadeInUp 1s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+/* DESKRIPSI */
+.invitation-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeInZoom 1s ease-out forwards;
+  animation-delay: 0.6s;
+}
+
+/* NAMA PASANGAN */
+.name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  font-style: italic;
+  margin: 0;
+  opacity: 0;
+  animation: slideUp 1s ease-in forwards;
+  animation-delay: 0.8s;
+}
+
+.and-symbol {
+  font-size: 2.5rem;
+  color: #fcead0;
+  margin: 30px 0;
+  opacity: 0;
+  animation: bounce 2s infinite, fadeIn 1s ease-in forwards;
+  animation-delay: 1s;
+}
+
+/* ICON */
+.icon-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #fcead0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 30px;
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 1.2s;
+}
+
+.icon-circle img {
+  width: 20px;
+  height: 20px;
+}
+
+/* GELOMBANG */
+.custom-wave,
+.custom-wave1 {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 1.4s;
+}
+
+.custom-wave1 {
+  transform: translateY(-122px);
+}
+
+/* CERITA CINTA */
+.story-section {
+  background-color: #1b2231;
+  padding: 3rem 1.5rem;
+  color: #fdf6f0;
+  text-align: center;
+  border-radius: 0;
+  margin-top: 0;
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 1.6s;
+}
+
+.story-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: slideUp 1s ease-in forwards;
+  animation-delay: 1.8s;
+}
+
+.story-block {
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 2s;
+}
+
+.story-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.story-block hr {
+  width: 60%;
+  margin: 0 auto 1rem;
+  border: 1px solid #fdf6f0;
+  opacity: 0.5;
+}
+
+.story-block p {
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* RESPONSIF */
+@media (max-width: 600px) {
+  .initials-box {
+    width: 130px;
+    padding: 30px 15px;
+  }
+
+  .couple-name {
+    font-size: 1.5rem;
+  }
+
+  .countdown-item {
+    min-width: 60px;
+    padding: 10px;
+  }
+
+  .save-date {
+    font-size: 0.9rem;
+  }
+
+  .story-title {
+    font-size: 1.5rem;
+  }
+
+  .name {
+    font-size: 1.4rem;
+  }
+
+  .and-symbol {
+    font-size: 2rem;
+  }
+
+  .invitation-desc {
+    font-size: 0.9rem;
+  }
+}
+
+
+.event-section {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background-color: #FFFFFF;
+   margin: -2.5rem auto;
+}
+
+.event-card {
+  background-color: #1b2231;
+  color: #fdf6f0;
+  border-radius: 20px;
+  padding: 2rem;
+  margin: -1rem auto;
+  max-width: 600px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.event-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  color: #e6c0a6;
+  margin-bottom: 1rem;
+}
+
+.event-date {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.event-time {
+  margin-bottom: 1rem;
+}
+
+.event-location {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.location-button {
+  background-color: #e6c0a6;
+  color: #1b2231;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.location-button:hover {
+  background-color: #d5ae94;
+}
+.digital-envelope-section {
+  background-color: #1d1f2b;
+  padding: 3rem 1.5rem;
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  margin-top: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-box {
+  border: 2px solid #fff;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+  font-size: 1rem;
+  color: #f5f5dc;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.section-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.section-subtext {
+  font-size: 1rem;
+  color: #e6dac5;
+  margin-bottom: 0.75rem;
+}
+
+.gift-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 2rem;
+  background-color: #e6dac5;
+  color: #1d1f2b;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.gift-button:hover {
+  background-color: #d4c3ad;
+}
+.digital-envelope-section {
+  background-color: #1d1f2b;
+  padding: 3rem 1.5rem;
+  border-radius: 20px;
+  text-align: center;
+  color: #fff;
+  margin-top: 3rem;
+  position: relative;
+}
+
+.section-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.section-subtext {
+  font-size: 1rem;
+  color: #e6dac5;
+  margin-bottom: 0.75rem;
+}
+
+.gift-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 2rem;
+  background-color: #e6dac5;
+  color: #1d1f2b;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.gift-info-container {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.card-info, .address-card {
+  background-color: #f9f9f9;
+  color: #333;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.bank-logo {
+  height: 30px;
+  float: right;
+}
+.bank-logo1 {
+  height: 60px;
+  float: right;
+}
+.card-number {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.card-name {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.copy-btn {
+  margin-top: 1rem;
+  background-color: #ccc;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.address-card h4 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #1d1f2b;
+}
+.rsvp-wishes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #fce4ec, #e1bee7); /* Pink & Purple soft */
+  border-radius: 20px;
+  background-image: url('https://www.transparenttextures.com/patterns/flowers.png'); /* Bunga halus pattern */
+  background-repeat: repeat;
+  background-size: contain;
+  font-family: 'Segoe UI', sans-serif;
+  position: relative;
+}
+
+.rsvp-wishes .flower-left, .rsvp-wishes .flower-right {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.rsvp-wishes .flower-left {
+  top: 10px;
+  left: 10px;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4f/Flower_icon_2.svg'); /* SVG bunga */
+}
+
+.rsvp-wishes .flower-right {
+  bottom: 10px;
+  right: 10px;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4f/Flower_icon_2.svg'); /* SVG bunga */
+}
+
+.rsvp, .wishes {
+  flex: 1 1 400px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.rsvp h2, .wishes h2 {
+  color: #016193; /* deep pink */
+  margin-bottom: 1rem;
+}
+
+form input, form select, form textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #345D7D; /* soft purple */
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #345D7D;
+}
+
+.rsvp-list, .wishes-list {
+  margin-top: 1.5rem;
+}
+
+.rsvp-list ul, .wishes-list ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.rsvp-list li, .wishes-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.wishes-list li strong {
+  color: #016193; /* darker purple */
+}
+
+@media (max-width: 600px) {
+  .rsvp-wishes {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .rsvp, .wishes {
+    padding: 1rem;
+  }
+
+  form input, form select, form textarea {
+    font-size: 0.95rem;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .rsvp-wishes .flower-left, .rsvp-wishes .flower-right {
+    width: 40px;
+    height: 40px;
+  }
+}
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.pagination-controls button {
+  background-color: #1d1f2b;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* Custom CSS untuk closing-section */
+.closing-section {
+  background-color: #14192D;
+  color: white;
+  padding-top: 2.5rem; /* 10px */
+  padding-bottom: 2.5rem; /* 10px */
+  padding-left: 1.5rem; /* 6px */
+  padding-right: 1.5rem; /* 6px */
+}
+
+.closing-section .rounded-full {
+  border-width: 4px;
+  border-color: white;
+}
+
+.closing-section .text-4xl {
+  font-size: 2.25rem; /* 36px */
+  font-family: 'serif';
+}
+
+.closing-section .absolute {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(50%, 50%);
+}
+
+.closing-section .text-base {
+  font-size: 1rem; /* 16px */
+  max-width: 36rem; /* max-w-xl */
+  margin-left: auto;
+  margin-right: auto;
+  color: #D1D5DB; /* gray-200 */
+}
+
+.closing-section .italic {
+  font-style: italic;
+  font-size: 1.125rem; /* 18px */
+  margin-top: 1.5rem;
+  color: #D1D5DB; /* gray-300 */
+}
+
+.closing-section .text-2xl {
+  font-size: 1.5rem; /* 24px */
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #EFD9C0;
+  font-family: 'Cursive', sans-serif;
+}
+
+.closing-section .text-sm {
+  font-size: 0.875rem; /* 14px */
+  color: #9CA3AF; /* gray-400 */
+  margin-top: 2.5rem;
+}
+
+.closing-section .underline {
+  text-decoration: underline;
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.initial-box {
+  width: 240px;
+  height: 400px;
+  margin: 0 auto 24px auto;
+  margin-top: 20px;
+  border: 2px solid white;
+  border-radius: 40%;
+  background-color: #1c2435;
+  font-family: serif;
+  font-size: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: white;
+}
+
+.initial-box hr {
+  width: 32px;
+  border: 1px solid white;
+  margin: 8px 0;
+}
+
+.floral-top-left,
+.floral-bottom-right {
+  position: absolute;
+}
+
+.floral-top-left {
+  top: -16px;
+  left: -16px;
+}
+
+.floral-top-left img,
+.floral-bottom-right img {
+  width: 64px;
+}
+
+.floral-bottom-right {
+  bottom: -16px;
+  right: -16px;
+}
+
+.invitation-text {
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+
+.closing-text {
+  font-style: italic;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.names {
+  font-size: 24px;
+  font-weight: bold;
+  font-style: italic;
+  font-family: serif;
+}
+
+.floral-bottom-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 160px;
+  z-index: 0;
+}
+
+.watermark {
+  text-align: center;
+  font-size: 12px;
+  color: gray;
+  margin-top: 24px;
+}
+.gallery-section {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #4F8FBD;
+  border-radius: 3%;
+}
+
+.gallery-slider {
+  position: relative;
+  max-width: 90%;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.slide-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: all 0.5s ease;
+  border-radius: 10px;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1b2231;
+  color: white;
+  border: none;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.nav-button:hover {
+  opacity: 1;
+}
+
+.nav-button.prev {
+  left: 10px;
+}
+
+.nav-button.next {
+  right: 10px;
+}
+
+@media (max-width: 600px) {
+  .nav-button {
+    font-size: 1.5rem;
+    padding: 0.4rem 0.8rem;
+  }
+}

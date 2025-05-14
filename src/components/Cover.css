@@ -1,0 +1,136 @@
+.cover-container {
+  background-color: #0e1525;
+  color: white;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 60px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.bunga {
+  position: absolute;
+  width: 150px;
+  animation: float 5s ease-in-out infinite;
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+  transform: rotate(180deg);
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+.circle {
+  border: 2px solid white;
+  width: 170px;
+  height: 380px;
+  border-radius: 60px;
+  margin: auto;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.initial {
+  font-size: 56px;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+}
+
+.line {
+  width: 40px;
+  border: 0.5px solid white;
+  margin: 10px 0;
+}
+
+.subtitle {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #cfcfcf;
+}
+
+.couple-name {
+  font-family: 'Dancing Script', cursive;
+  font-size: 46px;
+  margin: 10px 0;
+}
+
+.guest {
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.guest-detail {
+  font-size: 18px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.open-button {
+  background: linear-gradient(to bottom, #5778A3);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.open-button:hover {
+  transform: scale(1.05);
+}
+@keyframes slideUpFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+}
+
+.exit-slide-up {
+  animation: slideUpFadeOut 1.2s ease-in-out forwards;
+}
+.bunga {
+  position: absolute;
+  width: 100px; /* Sesuaikan ukuran sesuai kebutuhan */
+  z-index: 1;
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+  transform: scaleX(-1); /* Jika ingin mirror */
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+  transform: scaleX(-1); /* Jika ingin mirror */
+}
