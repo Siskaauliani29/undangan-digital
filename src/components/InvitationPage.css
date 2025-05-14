@@ -1063,5 +1063,22 @@ button:hover {
   }
 }
 
+.social-icons {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.social-icons a {
+  color: peru;
+  font-size: 1.25rem;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: salmon; /* warna hover, bisa kamu ganti */
+}
+
 
 

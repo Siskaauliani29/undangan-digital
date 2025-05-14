@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import './InvitationPage.css';
 import BackgroundMusic from './BackgroundMusic'; // atau sesuaikan path
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 function InvitationPage() {
   const [rsvpList, setRsvpList] = useState([]);
@@ -205,7 +206,7 @@ const prevSlide = () => {
 <div className="person">
   <h2 className="name">CUT RAIHAN SAIDA</h2>
   <p className="desc">
-    Putri dari Bapak Mawardi Noor dan Ibu Marlianti <br /> & Ibu Safrida
+    Putri dari Bapak Mawardi Noor dan Ibu Marlianti
   </p>
   <div className="icon-circle">
     <a href="https://www.instagram.com/cutreyhansaida?igsh=MWgwa2k2MjQ1NmNwbA==" target="_blank" rel="noopener noreferrer">
@@ -468,8 +469,25 @@ const prevSlide = () => {
 
 <div className="watermark">
   Made with ❤️ by Siskaa.id
+  <div className="social-icons">
+    <a
+      href="https://www.instagram.com/siskaaulianni?igsh=MTBlNGgyZnR0NW83Yw=="
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Instagram"
+    >
+      <FaInstagram />
+    </a>
+    <a
+      href="https://wa.me/6287891264500"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="WhatsApp"
+    >
+      <FaWhatsapp />
+    </a>
+  </div>
 </div>
-
 
     </motion.div>
     
