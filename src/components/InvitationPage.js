@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import './InvitationPage.css';
+import BackgroundMusic from './BackgroundMusic'; // atau sesuaikan path
 
 function InvitationPage() {
   const [rsvpList, setRsvpList] = useState([]);
@@ -143,7 +144,8 @@ const prevSlide = () => {
       exit={{ opacity: 0, y: -50 }}
       transition={{ duration: 1 }}
     >
-      <audio ref={audioRef} loop src="/bg-music.mp3" />
+     
+      <BackgroundMusic />
 
       {/* Bunga animasi */}
       <img src="/bunga.png" alt="top decoration" className="corner top-right animate-flower" />

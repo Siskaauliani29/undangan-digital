@@ -1,0 +1,34 @@
+.music-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: #1d1f2b;
+  color: white;
+  border: none;
+  padding: 0.4rem;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  animation: spin 4s linear infinite;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-toggle.paused {
+  animation: none;
+  opacity: 0.6;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
