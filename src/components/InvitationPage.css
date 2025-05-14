@@ -62,25 +62,45 @@
   animation: fadeIn 1s ease-in forwards;
   opacity: 0;
   animation-delay: 1s;
+  padding: 0 10px;
 }
 
 .countdown-item {
   background: #ead9ca;
   border-radius: 12px;
-  padding: 15px 20px;
-  min-width: 70px;
+  padding: 12px 16px;
+  min-width: 60px;
   animation: slideUp 0.8s ease-in forwards;
   opacity: 0;
   animation-delay: 1.2s;
+  text-align: center;
+  flex: 1 1 70px;
 }
 
 .countdown-item div {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
   animation: fadeIn 1s ease-in forwards;
   opacity: 0;
   animation-delay: 1.4s;
 }
+
+/* Media query untuk layar kecil (mobile) */
+@media (max-width: 480px) {
+  .countdown {
+    gap: 8px;
+  }
+
+  .countdown-item {
+    min-width: 50px;
+    padding: 10px 12px;
+  }
+
+  .countdown-item div {
+    font-size: 1rem;
+  }
+}
+
 
 .date {
   margin: 10px 0;
@@ -310,6 +330,19 @@
 
 .custom-wave1 {
   transform: translateY(-122px);
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 768px) {
+  .custom-wave1 {
+    transform: translateY(-60px); /* Kurangi efek agar tidak memotong konten */
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-wave1 {
+    transform: translateY(-40px); /* Lebih halus lagi di layar kecil */
+  }
 }
 
 /* CERITA CINTA */
@@ -605,30 +638,10 @@
   position: relative;
 }
 
-.rsvp-wishes .flower-left, .rsvp-wishes .flower-right {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.rsvp-wishes .flower-left {
-  top: 10px;
-  left: 10px;
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4f/Flower_icon_2.svg'); /* SVG bunga */
-}
-
-.rsvp-wishes .flower-right {
-  bottom: 10px;
-  right: 10px;
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4f/Flower_icon_2.svg'); /* SVG bunga */
-}
-
 .rsvp, .wishes {
-  flex: 1 1 400px;
+  flex: 1 1 300px;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 1.5rem;
+  padding: 2.1rem;
   border-radius: 16px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -905,6 +918,7 @@ button:hover {
   cursor: pointer;
   z-index: 1;
   opacity: 0.7;
+  border-radius: 6px;
 }
 
 .nav-button:hover {
@@ -919,9 +933,32 @@ button:hover {
   right: 10px;
 }
 
+/* MOBILE FRIENDLY STYLES */
 @media (max-width: 600px) {
+  .gallery-section {
+    padding: 1.5rem 0.5rem;
+    border-radius: 10px;
+  }
+
+  .gallery-slider {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .slide-wrapper img {
+    border-radius: 8px;
+  }
+
   .nav-button {
-    font-size: 1.5rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 1.25rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .nav-button.prev {
+    left: 5px;
+  }
+
+  .nav-button.next {
+    right: 5px;
   }
 }
