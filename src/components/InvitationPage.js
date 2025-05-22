@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import './InvitationPage.css';
-import BackgroundMusic from './BackgroundMusic'; // atau sesuaikan path
+import BackgroundMusic from './BackgroundMusic';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { db } from './firebaseConfig';
+import { ref, push, onValue } from "firebase/database";
 
 function InvitationPage() {
   const [rsvpList, setRsvpList] = useState([]);
@@ -15,47 +17,56 @@ function InvitationPage() {
 
   const totalRsvpPages = Math.ceil(rsvpList.length / itemsPerPage);
   const totalWishesPages = Math.ceil(wishesList.length / itemsPerPage);
-const handleSaveDate = () => {
-  const title = encodeURIComponent("Wedding Day of Diva & Reyhan");
-  const location = encodeURIComponent("Banda Aceh, Indonesia");
-  const details = encodeURIComponent("Join us on our wedding day!");
- const startDate = "20250525T020000Z";
-  const endDate = "20250525T040000Z";
+  
+  const handleSaveDate = () => {
+    const title = encodeURIComponent("Wedding Day of Diva & Reyhan");
+    const location = encodeURIComponent("Banda Aceh, Indonesia");
+    const details = encodeURIComponent("Join us on our wedding day!");
+    const startDate = "20250525T020000Z";
+    const endDate = "20250525T040000Z";
 
-  const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}&sf=true&output=xml`;
+    const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}&sf=true&output=xml`;
+    window.open(url, "_blank");
+  };
 
-  window.open(url, "_blank");
-};
   const paginate = (list, page) => {
     const start = (page - 1) * itemsPerPage;
     return list.slice(start, start + itemsPerPage);
   };
-  
-const [currentSlide, setCurrentSlide] = useState(0);
-const galleryImages = [
- '/assets/couple.png',
-  '/assets/story1.png',
-  '/assets/story2.png',
-  '/assets/story3.png',
-  // tambahkan sesuai kebutuhan
-];
 
-const nextSlide = () => {
-  setCurrentSlide((prev) => (prev + 1) % galleryImages.length);
-};
+  const galleryImages = [
+    '/assets/couple.png',
+    '/assets/story1.png',
+    '/assets/story2.png',
+    '/assets/story3.png',
+  ];
 
-const prevSlide = () => {
-  setCurrentSlide((prev) =>
-    prev === 0 ? galleryImages.length - 1 : prev - 1
-  );
-};
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % galleryImages.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
+
   const audioRef = useRef(null);
 
   useEffect(() => {
-    const savedRSVPs = JSON.parse(localStorage.getItem('rsvpList')) || [];
-    const savedWishes = JSON.parse(localStorage.getItem('wishesList')) || [];
-    setRsvpList(savedRSVPs);
-    setWishesList(savedWishes);
+    // Ambil data RSVP dari Firebase
+    const rsvpRef = ref(db, 'rsvpList');
+    onValue(rsvpRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+       const list = Object.values(data).sort((a, b) => b.id - a.id);
+setRsvpList(list);
+      }
+    });
+
+    // Ambil data Wishes dari Firebase
+    const wishRef = ref(db, 'wishesList');
+    onValue(wishRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+      const list = Object.values(data).sort((a, b) => b.id - a.id);
+setWishesList(list);
+      }
+    });
   }, []);
 
   const calculateCountdown = () => {
@@ -78,9 +89,7 @@ const prevSlide = () => {
   }, []);
 
   useEffect(() => {
-    audioRef.current?.play().catch(() => {
-      // autoplay gagal karena belum ada interaksi user
-    });
+    audioRef.current?.play().catch(() => {});
   }, []);
 
   const handleRSVPSubmit = (e) => {
@@ -89,14 +98,11 @@ const prevSlide = () => {
     const status = e.target.status.value;
 
     const dateObj = new Date();
-    const formattedDate =
-      dateObj.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-      }) +
-      ' / ' +
-      dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const formattedDate = dateObj.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    }) + ' / ' + dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     const newRSVP = {
       id: Date.now(),
@@ -105,10 +111,9 @@ const prevSlide = () => {
       date: formattedDate,
     };
 
-    const updatedRSVPs = [...rsvpList, newRSVP];
-    setRsvpList(updatedRSVPs);
-    localStorage.setItem('rsvpList', JSON.stringify(updatedRSVPs));
-
+    const rsvpRef = ref(db, 'rsvpList');
+    push(rsvpRef, newRSVP);
+    setRsvpPage(1);
     e.target.reset();
   };
 
@@ -125,18 +130,20 @@ const prevSlide = () => {
       message,
     };
 
-    const updatedWishes = [...wishesList, newWish];
-    setWishesList(updatedWishes);
-    localStorage.setItem('wishesList', JSON.stringify(updatedWishes));
-
+    const wishRef = ref(db, 'wishesList');
+    push(wishRef, newWish);
+    setWishesPage(1); 
     e.target.reset();
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText('7292551837');
+  const handleCopy1 = () => {
+    navigator.clipboard.writeText('7215488599');
     alert('Nomor rekening disalin!');
   };
-
+  const handleCopy2 = () => {
+    navigator.clipboard.writeText('0431307871');
+    alert('Nomor rekening disalin!');
+  };
   return (
     <motion.div
       className="invitation-container"
@@ -298,7 +305,7 @@ const prevSlide = () => {
             </div>
             <div className="card-number">7215488599</div>
             <div className="card-name">CUT RAIHAN SAIDA</div>
-            <button className="copy-btn" onClick={handleCopy}>📋 Copy</button>
+            <button className="copy-btn" onClick={handleCopy1}>📋 Copy</button>
           </div>
             <div className="card-info">
             <div className="bank-header">
@@ -306,7 +313,7 @@ const prevSlide = () => {
             </div>
             <div className="card-number">0431307871</div>
             <div className="card-name">DIVA HERIANDA SYAHPUTRA</div>
-            <button className="copy-btn" onClick={handleCopy}>📋 Copy</button>
+            <button className="copy-btn" onClick={handleCopy2}>📋 Copy</button>
           </div>
 
             
@@ -322,37 +329,35 @@ const prevSlide = () => {
         </div>
       )}
     </div>
-{/* RSVP & Wishes */}
-        <section className="rsvp-wishes px-4 py-8 bg-white">
-  <div className="rsvp max-w-md mx-auto text-center">
-    <h2 className="mb-4 text-2xl font-semibold">RSVP</h2>
-    <form onSubmit={handleRSVPSubmit} className="flex flex-col gap-4">
-      <input
-        type="text"
-        name="name"
-        placeholder="Your Name"
-        required
-        className="px-4 py-2 border rounded-md w-full"
-      />
-      <select
-        name="status"
-        required
-        className="px-4 py-2 border rounded-md w-full"
-      >
-        <option value="">Select Status</option>
-        <option value="Attending">Attending</option>
-        <option value="Not Attending">Not Attending</option>
-      </select>
-      <button
-        type="submit"
-        className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-      >
-        Submit
-      </button>
-    </form>
+ <section className="rsvp-wishes px-4 py-8 bg-white">
+      <div className="rsvp max-w-md mx-auto text-center">
+        <h2 className="mb-4 text-2xl font-semibold">RSVP</h2>
+        <form onSubmit={handleRSVPSubmit} className="flex flex-col gap-4">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+            className="px-4 py-2 border rounded-md w-full"
+          />
+          <select
+            name="status"
+            required
+            className="px-4 py-2 border rounded-md w-full"
+          >
+            <option value="">Select Status</option>
+            <option value="Attending">Attending</option>
+            <option value="Not Attending">Not Attending</option>
+          </select>
+          <button
+            type="submit"
+            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+          >
+            Submit
+          </button>
+        </form>
 
-
-        <div className="rsvp-list">
+        <div className="rsvp-list mt-6">
           <h3>Guest List</h3>
           {rsvpList.length === 0 ? (
             <p>No RSVP yet.</p>
@@ -365,20 +370,12 @@ const prevSlide = () => {
                   </li>
                 ))}
               </ul>
-              <div className="pagination-controls">
-                <button
-                  disabled={rsvpPage === 1}
-                  onClick={() => setRsvpPage(rsvpPage - 1)}
-                >
+              <div className="pagination-controls flex justify-between mt-2">
+                <button disabled={rsvpPage === 1} onClick={() => setRsvpPage(rsvpPage - 1)}>
                   ⬅ Previous
                 </button>
-                <span>
-                  {rsvpPage} / {totalRsvpPages}
-                </span>
-                <button
-                  disabled={rsvpPage === totalRsvpPages}
-                  onClick={() => setRsvpPage(rsvpPage + 1)}
-                >
+                <span>{rsvpPage} / {totalRsvpPages}</span>
+                <button disabled={rsvpPage === totalRsvpPages} onClick={() => setRsvpPage(rsvpPage + 1)}>
                   Next ➡
                 </button>
               </div>
@@ -387,16 +384,18 @@ const prevSlide = () => {
         </div>
       </div>
 
-      <div className="wishes">
-        <h2>Wishes</h2>
-        <form onSubmit={handleWishSubmit}>
-          <input type="text" name="name" placeholder="Name" required />
-          <input type="text" name="city" placeholder="City" />
-          <textarea name="message" placeholder="Message"></textarea>
-          <button type="submit">Send</button>
+      <div className="wishes max-w-md mx-auto text-center mt-10">
+        <h2 className="text-2xl font-semibold mb-4">Wishes</h2>
+        <form onSubmit={handleWishSubmit} className="flex flex-col gap-4">
+          <input type="text" name="name" placeholder="Name" required className="px-4 py-2 border rounded-md" />
+          <input type="text" name="city" placeholder="City" className="px-4 py-2 border rounded-md" />
+          <textarea name="message" placeholder="Message" className="px-4 py-2 border rounded-md"></textarea>
+          <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+            Send
+          </button>
         </form>
 
-        <div className="wishes-list">
+        <div className="wishes-list mt-6">
           <h3>Guest Wishes</h3>
           {wishesList.length === 0 ? (
             <p>No wishes yet.</p>
@@ -409,20 +408,12 @@ const prevSlide = () => {
                   </li>
                 ))}
               </ul>
-              <div className="pagination-controls">
-                <button
-                  disabled={wishesPage === 1}
-                  onClick={() => setWishesPage(wishesPage - 1)}
-                >
+              <div className="pagination-controls flex justify-between mt-2">
+                <button disabled={wishesPage === 1} onClick={() => setWishesPage(wishesPage - 1)}>
                   ⬅ Previous
                 </button>
-                <span>
-                  {wishesPage} / {totalWishesPages}
-                </span>
-                <button
-                  disabled={wishesPage === totalWishesPages}
-                  onClick={() => setWishesPage(wishesPage + 1)}
-                >
+                <span>{wishesPage} / {totalWishesPages}</span>
+                <button disabled={wishesPage === totalWishesPages} onClick={() => setWishesPage(wishesPage + 1)}>
                   Next ➡
                 </button>
               </div>
