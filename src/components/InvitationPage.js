@@ -18,16 +18,16 @@ function InvitationPage() {
   const totalRsvpPages = Math.ceil(rsvpList.length / itemsPerPage);
   const totalWishesPages = Math.ceil(wishesList.length / itemsPerPage);
   
-  const handleSaveDate = () => {
-    const title = encodeURIComponent("Wedding Day of Diva & Reyhan");
-    const location = encodeURIComponent("Banda Aceh, Indonesia");
-    const details = encodeURIComponent("Join us on our wedding day!");
-    const startDate = "20250525T020000Z";
-    const endDate = "20250525T040000Z";
+const handleSaveDate = () => {
+  const title = encodeURIComponent("Wedding Day of Diva & Cut Rey");
+  const location = encodeURIComponent("Banda Aceh, Indonesia");
+  const details = encodeURIComponent("Join us on our wedding day!");
+  const startDate = "20251005T070000Z"; // 5 Okt 2025, 14:00 WIB
+  const endDate = "20251005T090000Z";   // 5 Okt 2025, 16:00 WIB
 
-    const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}&sf=true&output=xml`;
-    window.open(url, "_blank");
-  };
+  const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}&sf=true&output=xml`;
+  window.open(url, "_blank");
+};
 
   const paginate = (list, page) => {
     const start = (page - 1) * itemsPerPage;
@@ -35,10 +35,16 @@ function InvitationPage() {
   };
 
   const galleryImages = [
-    '/assets/couple.png',
-    '/assets/story1.png',
-    '/assets/story2.png',
-    '/assets/story3.png',
+    '/assets/story1.jpg',
+    '/assets/story2.jpg',
+    '/assets/story3.jpg',
+    '/assets/story4.jpg',
+    '/assets/story5.jpg',
+    '/assets/story6.jpg',
+    '/assets/story7.jpg',
+    '/assets/story8.jpg',
+    '/assets/story9.jpg',
+    '/assets/story10.jpg',
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -47,40 +53,46 @@ function InvitationPage() {
 
   const audioRef = useRef(null);
 
-  useEffect(() => {
-    // Ambil data RSVP dari Firebase
-    const rsvpRef = ref(db, 'rsvpList');
-    onValue(rsvpRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-       const list = Object.values(data).sort((a, b) => b.id - a.id);
-setRsvpList(list);
-      }
-    });
-
-    // Ambil data Wishes dari Firebase
-    const wishRef = ref(db, 'wishesList');
-    onValue(wishRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
+ useEffect(() => {
+  // RSVP resepsi
+  const rsvpRef = ref(db, 'resepsiRsvpList');
+  onValue(rsvpRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
       const list = Object.values(data).sort((a, b) => b.id - a.id);
-setWishesList(list);
-      }
-    });
-  }, []);
+      setRsvpList(list);
+    } else {
+      setRsvpList([]);
+    }
+  });
+
+  // Wishes resepsi
+  const wishRef = ref(db, 'resepsiWishesList');
+  onValue(wishRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      const list = Object.values(data).sort((a, b) => b.id - a.id);
+      setWishesList(list);
+    } else {
+      setWishesList([]);
+    }
+  });
+}, []);
+
 
   const calculateCountdown = () => {
-    const targetDate = new Date('2025-05-25T00:00:00').getTime();
-    const now = new Date().getTime();
-    const difference = targetDate - now;
+  const targetDate = new Date('2025-10-05T00:00:00').getTime();
+  const now = new Date().getTime();
+  const difference = targetDate - now;
 
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((difference / 1000 / 60) % 60);
-    const seconds = Math.floor((difference / 1000) % 60);
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((difference / 1000 / 60) % 60);
+  const seconds = Math.floor((difference / 1000) % 60);
 
-    setTimeLeft({ days, hours, minutes, seconds });
-  };
+  setTimeLeft({ days, hours, minutes, seconds });
+};
+
 
   useEffect(() => {
     calculateCountdown();
@@ -92,49 +104,7 @@ setWishesList(list);
     audioRef.current?.play().catch(() => {});
   }, []);
 
-  const handleRSVPSubmit = (e) => {
-    e.preventDefault();
-    const name = e.target.name.value;
-    const status = e.target.status.value;
 
-    const dateObj = new Date();
-    const formattedDate = dateObj.toLocaleDateString('en-GB', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-    }) + ' / ' + dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-    const newRSVP = {
-      id: Date.now(),
-      name,
-      status,
-      date: formattedDate,
-    };
-
-    const rsvpRef = ref(db, 'rsvpList');
-    push(rsvpRef, newRSVP);
-    setRsvpPage(1);
-    e.target.reset();
-  };
-
-  const handleWishSubmit = (e) => {
-    e.preventDefault();
-    const name = e.target.name.value;
-    const city = e.target.city.value;
-    const message = e.target.message.value;
-
-    const newWish = {
-      id: Date.now(),
-      name,
-      city,
-      message,
-    };
-
-    const wishRef = ref(db, 'wishesList');
-    push(wishRef, newWish);
-    setWishesPage(1); 
-    e.target.reset();
-  };
 
   const handleCopy1 = () => {
     navigator.clipboard.writeText('7215488599');
@@ -178,16 +148,52 @@ setWishesList(list);
         <div className="countdown-item"><div>{timeLeft.seconds}</div><p>Detik</p></div>
       </div>
 
-      <p className="date">Minggu, 25 Mei 2025</p>
+      <p className="date">Minggu, 5 Oktober 2025</p>
 
       <button className="save-date" onClick={handleSaveDate}>
   📅 Save The Date
 </button>
 
       <div className="scroll-more">⬇️ Scroll untuk melihat lebih banyak</div>
-<div className="custom-wave">
- <svg width="100%" height="100%" id="svg" viewBox="0 0 1440 580" xmlns="http://www.w3.org/2000/svg" class="transition duration-300 ease-in-out delay-150"><defs><linearGradient id="gradient" x1="43%" y1="100%" x2="57%" y2="0%"><stop offset="5%" stop-color="#0f1621"></stop><stop offset="95%" stop-color="#8ED1FC"></stop></linearGradient></defs><path d="M 0,600 L 0,150 C 102.6602870813397,132.95693779904306 205.3205741626794,115.91387559808611 286,113 C 366.6794258373206,110.08612440191389 425.37799043062194,121.30143540669857 525,111 C 624.6220095693781,100.69856459330143 765.1674641148325,68.88038277511961 875,84 C 984.8325358851675,99.11961722488039 1063.952153110048,161.17703349282297 1153,180 C 1242.047846889952,198.82296650717703 1341.023923444976,174.41148325358853 1440,150 L 1440,600 L 0,600 Z" stroke="none" stroke-width="0" fill="url(#gradient)" fill-opacity="0.53" class="transition-all duration-300 ease-in-out delay-150 path-0"></path><defs><linearGradient id="gradient" x1="43%" y1="100%" x2="57%" y2="0%"><stop offset="5%" stop-color="#0f1621"></stop><stop offset="95%" stop-color="#8ED1FC"></stop></linearGradient></defs><path d="M 0,600 L 0,350 C 81.5023923444976,304.94736842105266 163.0047846889952,259.8947368421053 263,282 C 362.9952153110048,304.1052631578947 481.48325358851685,393.3684210526315 572,416 C 662.5167464114832,438.6315789473685 725.0622009569377,394.63157894736844 826,369 C 926.9377990430623,343.36842105263156 1066.267942583732,336.10526315789474 1175,336 C 1283.732057416268,335.89473684210526 1361.8660287081339,342.9473684210526 1440,350 L 1440,600 L 0,600 Z" stroke="none" stroke-width="0" fill="url(#gradient)" fill-opacity="1" class="transition-all duration-300 ease-in-out delay-150 path-1"></path></svg>
+<div class="custom-wave">
+  <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+
+      <linearGradient id="gradientFront" x1="43%" y1="100%" x2="57%" y2="0%">
+        <stop offset="0%" stop-color="#1b2231"></stop>
+        <stop offset="50%" stop-color="#FF8DA1"></stop>
+        <stop offset="100%" stop-color="#8ED1FC"></stop>
+      </linearGradient>
+
+      <linearGradient id="gradientBack" x1="43%" y1="100%" x2="57%" y2="0%">
+        <stop offset="0%" stop-color="#0f1621"></stop>
+        <stop offset="100%" stop-color="#1b2231"></stop>
+      </linearGradient>
+    </defs>
+
+
+    <path fill="url(#gradientBack)" fill-opacity="0.7">
+      <animate attributeName="d" dur="20s" repeatCount="indefinite" values="
+        M0,160 C480,280 960,40 1440,160 L1440,320 L0,320 Z;
+        M0,180 C480,60 960,300 1440,180 L1440,320 L0,320 Z;
+        M0,160 C480,280 960,40 1440,160 L1440,320 L0,320 Z
+      " />
+    </path>
+
+
+    <path fill="url(#gradientFront)" fill-opacity="0.9">
+      <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+        M0,200 C480,100 960,260 1440,200 L1440,320 L0,320 Z;
+        M0,220 C480,280 960,120 1440,220 L1440,320 L0,320 Z;
+        M0,200 C480,100 960,260 1440,200 L1440,320 L0,320 Z
+      " />
+    </path>
+  </svg>
 </div>
+
+
+
+
 
 
       <div className="full-invitation">
@@ -195,12 +201,12 @@ setWishesList(list);
   <p className="invitation-desc">
     Tanpa mengurangi rasa hormat. Kami mengundang <br />
     Bapak/Ibu/Saudara/i serta kerabat sekalian untuk menghadiri <br />
-    acara pernikahan kami:
+    acara Resepsi pernikahan kami:
   </p>
 
   <div className="person">
   <h2 className="name">DIVA HERIANDA SYAHPUTRA</h2>
-  <p className="desc">Putra dari Bapak Hermansyah dan Ibu Mastura</p>
+  <p className="desc">Putra ke - 5 dari Bapak Hermansyah dan Ibu Mastura</p>
   <div className="icon-circle">
     <a href="https://www.instagram.com/defzzz11?igsh=ZzY1eTA3dGcxNzFl" target="_blank" rel="noopener noreferrer">
       <img src="/instagram-icon.png" alt="ig" />
@@ -213,7 +219,7 @@ setWishesList(list);
 <div className="person">
   <h2 className="name">CUT RAIHAN SAIDA</h2>
   <p className="desc">
-    Putri dari Bapak Mawardi Noor dan Ibu Marlianti
+    Putri ke - 3 dari Bapak Mawardi Noor dan Ibu Marlianti
   </p>
   <div className="icon-circle">
     <a href="https://www.instagram.com/cutreyhansaida?igsh=MWgwa2k2MjQ1NmNwbA==" target="_blank" rel="noopener noreferrer">
@@ -265,25 +271,50 @@ setWishesList(list);
 </div>
 
 <div className="event-section">
+  {/* Akad Nikah */}
   <div className="event-card">
     <h2 className="event-title">Akad Nikah</h2>
     <p className="event-date">Minggu, 25 Mei 2025</p>
     <p className="event-time">Pukul : 10:00 WIB</p>
     <p className="event-location">
       <strong>Masjid Raya Baiturrahman</strong><br />
-     Jl. Moh. Jam No.1, Kp. Baru, Kec. Baiturrahman, Kota Banda Aceh, Aceh
+      Jl. Moh. Jam No.1, Kp. Baru, Kec. Baiturrahman, Kota Banda Aceh, Aceh
     </p>
   </div>
 
   <a
-  className="location-button"
-  href="https://maps.app.goo.gl/gRvz57DmEp9rv5Vr6" // Ganti dengan link Google Maps yang sesuai
-  target="_blank"
-  rel="noopener noreferrer"
->
-  📍 Lihat Lokasi
-</a>
+    className="location-button"
+    href="https://maps.app.goo.gl/gRvz57DmEp9rv5Vr6"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    📍 Lihat Lokasi
+  </a>
 </div>
+
+<div className="event-section">
+  {/* Resepsi */}
+  <div className="event-card">
+    <h2 className="event-title">Resepsi</h2>
+    <p className="event-date">Minggu, 05 Oktober 2025</p>
+    <p className="event-time">Pukul : 11.00 - selesai</p>
+    <p className="event-location">
+      <strong>Kediaman Mempelai Wanita</strong><br />
+      Jl. Angsa, Dusun Suka Jaya, Batoh, Kec. Lueng Bata, Banda Aceh
+    </p>
+  </div>
+
+  <a
+    className="location-button"
+    href="https://maps.app.goo.gl/FiTNkFomS2dsu9U39?g_st=iw"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    📍 Lihat Lokasi
+  </a>
+</div>
+
+
 <div className="digital-envelope-section">
       <h2 className="section-title">Amplop Digital</h2>
       <p className="section-subtext">
@@ -329,99 +360,184 @@ setWishesList(list);
         </div>
       )}
     </div>
- <section className="rsvp-wishes px-4 py-8 bg-white">
-      <div className="rsvp max-w-md mx-auto text-center">
-        <h2 className="mb-4 text-2xl font-semibold">RSVP</h2>
-        <form onSubmit={handleRSVPSubmit} className="flex flex-col gap-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            required
-            className="px-4 py-2 border rounded-md w-full"
-          />
-          <select
-            name="status"
-            required
-            className="px-4 py-2 border rounded-md w-full"
-          >
-            <option value="">Select Status</option>
-            <option value="Attending">Attending</option>
-            <option value="Not Attending">Not Attending</option>
-          </select>
-          <button
-            type="submit"
-            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-          >
-            Submit
-          </button>
-        </form>
 
-        <div className="rsvp-list mt-6">
-          <h3>Guest List</h3>
-          {rsvpList.length === 0 ? (
-            <p>No RSVP yet.</p>
-          ) : (
-            <>
-              <ul>
-                {paginate(rsvpList, rsvpPage).map((rsvp) => (
-                  <li key={rsvp.id}>
-                    {rsvp.name}: {rsvp.status}
-                  </li>
-                ))}
-              </ul>
-              <div className="pagination-controls flex justify-between mt-2">
-                <button disabled={rsvpPage === 1} onClick={() => setRsvpPage(rsvpPage - 1)}>
-                  ⬅ Previous
-                </button>
-                <span>{rsvpPage} / {totalRsvpPages}</span>
-                <button disabled={rsvpPage === totalRsvpPages} onClick={() => setRsvpPage(rsvpPage + 1)}>
-                  Next ➡
-                </button>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
+<section className="rsvp-wishes px-4 py-8 bg-white">
+  <div className="rsvp max-w-md mx-auto text-center">
+    <h2 className="mb-4 text-2xl font-semibold">RSVP Resepsi</h2>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        const name = e.target.name.value;
+        const status = e.target.status.value;
 
-      <div className="wishes max-w-md mx-auto text-center mt-10">
-        <h2 className="text-2xl font-semibold mb-4">Wishes</h2>
-        <form onSubmit={handleWishSubmit} className="flex flex-col gap-4">
-          <input type="text" name="name" placeholder="Name" required className="px-4 py-2 border rounded-md" />
-          <input type="text" name="city" placeholder="City" className="px-4 py-2 border rounded-md" />
-          <textarea name="message" placeholder="Message" className="px-4 py-2 border rounded-md"></textarea>
-          <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-            Send
-          </button>
-        </form>
+        const dateObj = new Date();
+        const formattedDate =
+          dateObj.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
+          }) +
+          ' / ' +
+          dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-        <div className="wishes-list mt-6">
-          <h3>Guest Wishes</h3>
-          {wishesList.length === 0 ? (
-            <p>No wishes yet.</p>
-          ) : (
-            <>
-              <ul>
-                {paginate(wishesList, wishesPage).map((wish) => (
-                  <li key={wish.id}>
-                    <strong>{wish.name}</strong> ({wish.city}): {wish.message}
-                  </li>
-                ))}
-              </ul>
-              <div className="pagination-controls flex justify-between mt-2">
-                <button disabled={wishesPage === 1} onClick={() => setWishesPage(wishesPage - 1)}>
-                  ⬅ Previous
-                </button>
-                <span>{wishesPage} / {totalWishesPages}</span>
-                <button disabled={wishesPage === totalWishesPages} onClick={() => setWishesPage(wishesPage + 1)}>
-                  Next ➡
-                </button>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-    </section>
+        const newRSVP = {
+          id: Date.now(),
+          name,
+          status,
+          date: formattedDate,
+        };
+
+        const rsvpRef = ref(db, 'resepsiRsvpList'); // 🔹 node baru
+        push(rsvpRef, newRSVP);
+        setRsvpPage(1);
+        e.target.reset();
+      }}
+      className="flex flex-col gap-4"
+    >
+      <input
+        type="text"
+        name="name"
+        placeholder="Your Name"
+        required
+        className="px-4 py-2 border rounded-md w-full"
+      />
+      <select
+        name="status"
+        required
+        className="px-4 py-2 border rounded-md w-full"
+      >
+        <option value="">Select Status</option>
+        <option value="Attending">Attending</option>
+        <option value="Not Attending">Not Attending</option>
+      </select>
+      <button
+        type="submit"
+        className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+      >
+        Submit
+      </button>
+    </form>
+
+    <div className="rsvp-list mt-6">
+      <h3>Guest List</h3>
+      {rsvpList.length === 0 ? (
+        <p>No RSVP yet.</p>
+      ) : (
+        <>
+          <ul>
+            {paginate(rsvpList, rsvpPage).map((rsvp) => (
+              <li key={rsvp.id}>
+                {rsvp.name}: {rsvp.status}
+              </li>
+            ))}
+          </ul>
+          <div className="pagination-controls flex justify-between mt-2">
+            <button
+              disabled={rsvpPage === 1}
+              onClick={() => setRsvpPage(rsvpPage - 1)}
+            >
+              ⬅ Previous
+            </button>
+            <span>
+              {rsvpPage} / {totalRsvpPages}
+            </span>
+            <button
+              disabled={rsvpPage === totalRsvpPages}
+              onClick={() => setRsvpPage(rsvpPage + 1)}
+            >
+              Next ➡
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  </div>
+
+  <div className="wishes max-w-md mx-auto text-center mt-10">
+    <h2 className="text-2xl font-semibold mb-4">Wishes Resepsi</h2>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        const name = e.target.name.value;
+        const city = e.target.city.value;
+        const message = e.target.message.value;
+
+        const newWish = {
+          id: Date.now(),
+          name,
+          city,
+          message,
+        };
+
+        const wishRef = ref(db, 'resepsiWishesList'); // 🔹 node baru
+        push(wishRef, newWish);
+        setWishesPage(1);
+        e.target.reset();
+      }}
+      className="flex flex-col gap-4"
+    >
+      <input
+        type="text"
+        name="name"
+        placeholder="Name"
+        required
+        className="px-4 py-2 border rounded-md"
+      />
+      <input
+        type="text"
+        name="city"
+        placeholder="City"
+        className="px-4 py-2 border rounded-md"
+      />
+      <textarea
+        name="message"
+        placeholder="Message"
+        className="px-4 py-2 border rounded-md"
+      ></textarea>
+      <button
+        type="submit"
+        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+      >
+        Send
+      </button>
+    </form>
+
+    <div className="wishes-list mt-6">
+      <h3>Guest Wishes</h3>
+      {wishesList.length === 0 ? (
+        <p>No wishes yet.</p>
+      ) : (
+        <>
+          <ul>
+            {paginate(wishesList, wishesPage).map((wish) => (
+              <li key={wish.id}>
+                <strong>{wish.name}</strong> ({wish.city}): {wish.message}
+              </li>
+            ))}
+          </ul>
+          <div className="pagination-controls flex justify-between mt-2">
+            <button
+              disabled={wishesPage === 1}
+              onClick={() => setWishesPage(wishesPage - 1)}
+            >
+              ⬅ Previous
+            </button>
+            <span>
+              {wishesPage} / {totalWishesPages}
+            </span>
+            <button
+              disabled={wishesPage === totalWishesPages}
+              onClick={() => setWishesPage(wishesPage + 1)}
+            >
+              Next ➡
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  </div>
+</section>
+
     <div className="gallery-section">
   <h4>Our Memories</h4>
   <div className="gallery-slider">

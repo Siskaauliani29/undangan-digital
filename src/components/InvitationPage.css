@@ -23,7 +23,7 @@
 
 .initials-box {
   margin: 20px auto;
-  background: #151c31;
+  background:#0F1621;
   color: white;
   padding: 40px 20px;
   border-radius: 50px;
@@ -66,7 +66,7 @@
 }
 
 .countdown-item {
-  background: #ead9ca;
+  background: #FFC0CB;
   border-radius: 12px;
   padding: 12px 16px;
   min-width: 60px;
@@ -114,10 +114,10 @@
 .save-date {
   margin-top: 20px;
   padding: 12px 24px;
-  background: #c8b7a6;
+  background: #FFC0CB;
   border: none;
   border-radius: 20px;
-  color: #fff;
+  color: black;
   font-style: italic;
   font-size: 1rem;
   cursor: pointer;
@@ -223,13 +223,30 @@
 /* UNDANGAN */
 .full-invitation {
   text-align: center;
-  background-color: #0F1621;
+  background: linear-gradient(-45deg, #1b2231, #FF8DA1, #1b2231, #8ED1FC, #1b2231);
+  background-size: 400% 400%;
+  animation: gradientBG 12s ease infinite, fadeIn 1s ease-in forwards;
   color: #FCEAD0;
   padding: 50px 20px;
   position: relative;
   font-family: 'Poppins', sans-serif;
-  animation: fadeIn 1s ease-in forwards;
 }
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
 
 /* TEKS PEMBUKA */
 /* ANIMASI YANG LEBIH KEREN */
@@ -317,7 +334,22 @@
 }
 
 /* GELOMBANG */
-.custom-wave,
+.custom-wave {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-wave svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+
 .custom-wave1 {
   width: 100%;
   overflow: hidden;
@@ -453,7 +485,7 @@
 .event-title {
   font-family: 'Great Vibes', cursive;
   font-size: 2rem;
-  color: #e6c0a6;
+  color: #FFB6C1;
   margin-bottom: 1rem;
 }
 
@@ -473,7 +505,7 @@
 }
 
 .location-button {
-  background-color: #e6c0a6;
+  background-color: #FFB6C1;
   color: #1b2231;
   padding: 0.75rem 2rem;
   border: none;
