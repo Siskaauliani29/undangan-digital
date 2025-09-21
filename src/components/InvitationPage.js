@@ -22,12 +22,15 @@ const handleSaveDate = () => {
   const title = encodeURIComponent("Wedding Day of Diva & Cut Rey");
   const location = encodeURIComponent("Banda Aceh, Indonesia");
   const details = encodeURIComponent("Join us on our wedding day!");
-  const startDate = "20251005T070000Z"; // 5 Okt 2025, 14:00 WIB
-  const endDate = "20251005T090000Z";   // 5 Okt 2025, 16:00 WIB
+
+  // WIB 11:00 → 04:00 UTC
+  const startDate = "20251005T040000Z"; // 5 Okt 2025, 11:00 WIB
+  const endDate = "20251005T090000Z";   // 5 Okt 2025, 16:00 WIB (perkiraan selesai)
 
   const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}&sf=true&output=xml`;
   window.open(url, "_blank");
 };
+
 
   const paginate = (list, page) => {
     const start = (page - 1) * itemsPerPage;
@@ -302,6 +305,7 @@ const handleSaveDate = () => {
       <strong>Kediaman Mempelai Wanita</strong><br />
       Jl. Angsa, Dusun Suka Jaya, Batoh, Kec. Lueng Bata, Banda Aceh
     </p>
+    
   </div>
 
   <a
