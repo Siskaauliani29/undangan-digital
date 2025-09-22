@@ -19,7 +19,7 @@ function InvitationPage() {
   const totalWishesPages = Math.ceil(wishesList.length / itemsPerPage);
   
 const handleSaveDate = () => {
-  const title = encodeURIComponent("Wedding Day of Diva & Cut Rey");
+  const title = encodeURIComponent("Wedding Day of Diva & Cutrey");
   const location = encodeURIComponent("Banda Aceh, Indonesia");
   const details = encodeURIComponent("Join us on our wedding day!");
 
@@ -141,7 +141,7 @@ const handleSaveDate = () => {
       </div>
 
       <h1 className="couple-name">
-        <span>Diva</span> & <span>Cut Rey</span>
+        <span>Diva</span> & <span>Cutrey</span>
       </h1>
 
       <div className="countdown">
@@ -220,7 +220,7 @@ const handleSaveDate = () => {
 <div className="and-symbol">&</div>
 
 <div className="person">
-  <h2 className="name">CUT RAIHAN SAIDA</h2>
+  <h2 className="name">CUT RAIHAN SAIDA, S.Ag</h2>
   <p className="desc">
     Putri ke - 3 dari Bapak Mawardi Noor dan Ibu Marlianti
   </p>
@@ -355,7 +355,7 @@ const handleSaveDate = () => {
 
           <div className="address-card">
             <h4>🎁 Kirim Hadiah</h4>
-            <p>Nama Penerima: Cut Rey </p>
+            <p>Nama Penerima: Cutrey </p>
             <p>No. HP: 085247099098</p>
             <p>
               Alamat: Jl. Angsa, dusun suka jaya, desa batoh, kec. lueng bata, banda aceh, aceh.
@@ -574,7 +574,7 @@ const handleSaveDate = () => {
   <p className="closing-text">
     Wassalamu’alaikum Wr. Wb.
   </p>
-  <h2 className="names">Diva & Cut Rey</h2>
+  <h2 className="names">Diva & Cutrey</h2>
 </div>
 
 
